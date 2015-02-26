@@ -20,11 +20,7 @@ namespace Aphelion
 
         public static void SetFile(string file, bool createIfNonexistant)
         {
-            if (File.Exists(file))
-            {
-                Settings.file = file;
-            }
-            else if (createIfNonexistant)
+            if (createIfNonexistant)
             {
                 File.WriteAllText(file, string.Empty);
             }
@@ -32,6 +28,8 @@ namespace Aphelion
             {
                 throw new Exception("File does not exist");
             }
+
+            Settings.file = file;
         }
 
 
