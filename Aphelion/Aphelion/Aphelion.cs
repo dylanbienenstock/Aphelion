@@ -514,7 +514,7 @@ namespace Aphelion
 
             Interface.TextButton optionsButton = new Interface.TextButton();
             optionsButton.Tag = "Title Menu";
-            optionsButton.Text = "*Options";
+            optionsButton.Text = "Options";
             optionsButton.Position = new Vector2(titleLabel.Position.X, padding + instructionsButton.Position.Y + instructionsButton.CalculateDimensions().Y);
             optionsButton.Scale = labelScale;
             optionsButton.HoverMode = Interface.TextButtonHoverMode.PointAt;
@@ -525,6 +525,18 @@ namespace Aphelion
                 if (openPrompt != "Options")
                 {
                     SetPrompt("Options");
+
+                    Interface.Panel optionsPanel = new Interface.Panel();
+                    optionsPanel.Tag = "Prompt";
+                    optionsPanel.AutoSize = true;
+                    optionsPanel.Position = new Vector2(titleMenuPanel.Position.X, titleMenuPanel.Position.Y + titleMenuPanel.CalculateDimensions().Y + panelPadding + titleMenuPanel.BorderScale);
+                    optionsPanel.BorderScale = titleMenuPanel.BorderScale;
+                    Interface.InterfaceManager.Add(optionsPanel);
+
+                    Action<string, Type, object> AddOption = (name, type, defaultValue) =>
+                    {
+                        // TO DO ASAP: Finish this
+                    };
                 }
             };
             titleMenuPanel.Add(optionsButton);
