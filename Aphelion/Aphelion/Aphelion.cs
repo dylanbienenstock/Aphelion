@@ -19,9 +19,11 @@ namespace Aphelion
         InGame
     }
 
-    public class Aphelion : Game // TO DO: Make it so the boundary's radius is 1,048,576 (2^20) and so 1 pixel = 100 km (EARTH = 128 px)
-                                                                                    // DO 2^26 OR 2^30 MAYBE
+    public class Aphelion : Game
     {
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern void SwitchToThisWindow(IntPtr hWnd, bool fAltTab);
+
         public GameState State = GameState.AtMenu;
         public Camera MainCamera = new Camera();
         GraphicsDeviceManager graphics;
@@ -459,6 +461,11 @@ namespace Aphelion
                             SetPrompt(null);
 
                             Process.Start("AphelionServer.exe", portTextBox.Text);
+
+                            Timer.Create("RefocusFromServer", 100, 1, () =>
+                            {
+                                SwitchToThisWindow(Window.Handle, true);
+                            });
                         });
                     };
                     hostPanel.Add(confirmButton);
